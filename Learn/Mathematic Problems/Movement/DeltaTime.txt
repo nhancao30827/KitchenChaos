@@ -1,0 +1,11 @@
+In Unity, delta time refers to the amount of time that has passed between the current frame and the previous frame in a game. It’s represented by the variable Time.deltaTime, which is measured in seconds. Since games run at varying frame rates depending on hardware (e.g., 30 FPS, 60 FPS, or higher), delta time ensures that movement, animations, and other time-based actions remain consistent and smooth regardless of how fast or slow the game is running.
+
+For example:
+
+If you want an object to move 2 units per second, you multiply the speed (2) by Time.deltaTime. This adjusts the movement based on the time between frames, preventing it from moving too fast on a powerful computer or too slow on a weaker one.
+Key uses in Unity:
+
+Movement: transform.position += Vector3.forward * speed * Time.deltaTime; moves an object forward at a consistent speed.
+Timers: Subtract Time.deltaTime from a countdown to update it smoothly.
+Physics: Unity’s physics engine often uses FixedUpdate with Time.fixedDeltaTime for consistent physics calculations.
+In short, Time.deltaTime is Unity’s way of keeping time-dependent actions frame-rate independent.

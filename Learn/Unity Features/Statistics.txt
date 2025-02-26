@@ -1,0 +1,103 @@
+The Stats Panel in Unity’s Game View
+=====================================
+These numbers appear in the Stats panel of the Game view in Unity, showing real-time performance data.
+
+1. FPS (Frames Per Second)
+   - What it is: Number of frames rendered per second. Higher = smoother gameplay.
+   - Typical Values: 60 FPS (ideal), 30 FPS (minimum).
+   - Note: Inferred from frame time (e.g., 16.67 ms = 60 FPS).
+
+2. Batches
+   - What it is: Number of grouped draw calls for efficient rendering.
+   - Why it matters: Fewer batches = better performance.
+   - Optimization: Use static/dynamic batching.
+
+3. Draw Calls (Saved by Batching)
+   - What it is: Individual rendering commands to the GPU. "Saved" shows batching efficiency.
+   - Why it matters: High draw calls slow rendering.
+   - Goal: <300-500 for mobile, higher for PC.
+
+4. Tris (Triangles)
+   - What it is: Total triangles rendered in the frame.
+   - Details: Defines mesh complexity.
+   - Goal: 50k-200k for mobile, millions for PC.
+
+5. Verts (Vertices)
+   - What it is: Total vertices processed in the frame.
+   - Details: Points defining meshes.
+   - Why it matters: High counts strain the GPU.
+
+6. Screen
+   - What it is: Resolution of the Game view (e.g., 1920x1080).
+   - Note: Larger resolutions increase GPU load.
+
+7. SetPass Calls
+   - What it is: Number of shader/material switches during rendering.
+   - Why it matters: Fewer = better performance.
+   - Goal: <50-100 for mobile.
+
+8. Shadow Casters
+   - What it is: Number of objects casting shadows.
+   - Details: Shadows add rendering passes.
+   - Optimization: Limit shadow casters.
+
+9. Visible Skinned Meshes
+   - What it is: Number of visible animated (skinned) meshes.
+   - Details: Expensive due to bone animations.
+
+10. Animation Components Playing
+    - What it is: Number of active animations.
+    - Details: Impacts CPU due to transform calculations.
+
+---
+
+Additional Stats in the Profiler
+================================
+The Profiler (Window > Analysis > Profiler) provides deeper performance metrics.
+
+1. CPU Usage (ms)
+   - What it is: Time (milliseconds) for CPU to process a frame.
+   - Goal: <16.67 ms (60 FPS), <33.33 ms (30 FPS).
+
+2. GPU Usage (ms)
+   - What it is: Time for GPU to render a frame.
+   - Goal: Matches CPU target (e.g., <16.67 ms for 60 FPS).
+
+3. Memory (Total Reserved, Used)
+   - What it is: Memory Unity reserves and uses (MB/GB).
+   - Details: Includes textures, meshes, etc.
+   - Why it matters: Avoid crashes on low-memory devices.
+
+4. GC Allocations (Garbage Collection)
+   - What it is: Memory allocated per frame (bytes).
+   - Details: Frequent GC can cause stutters.
+   - Optimization: Minimize allocations in scripts.
+
+5. Physics (Active Rigidbodies, Contacts)
+   - What it is: Number of physics objects and collisions.
+   - Details: High counts increase CPU load.
+
+6. Audio Voices
+   - What it is: Number of active audio sources.
+   - Details: Too many strain CPU/audio hardware.
+
+---
+
+Practical Example
+==================
+Scene Stats:
+- FPS: ~60 (16.67 ms/frame)
+- Batches: 25
+- Tris: 150k
+- Verts: 200k
+- SetPass Calls: 40
+- Shadow Casters: 10
+If FPS drops to 20 (50 ms/frame), check Profiler for CPU/GPU bottlenecks.
+
+---
+
+Why These Stats Matter
+======================
+- Performance: High numbers (batches, tris) can slow the game.
+- Optimization: Use stats to find bottlenecks (e.g., too many materials).
+- Platform-Specific: Mobile needs lower counts than PC.
